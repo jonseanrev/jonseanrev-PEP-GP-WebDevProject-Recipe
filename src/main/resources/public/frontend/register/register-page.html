@@ -13,22 +13,35 @@
 </head>
 <body>
 
+    
     <!-- TODO: Add a heading (h1) with text "Register" -->
-
+    <h1>Register</h1>
+    <form id="register-form">
     <!-- TODO: Add a label or paragraph for "Username" -->
     <!-- TODO: Add an input element for username with id="username-input" -->
+        <label for="username-input">Username:</label>
+        <input id="username-input" name="username" type="text" required="true">
 
     <!-- TODO: Add a label or paragraph for "Email" -->
     <!-- TODO: Add an input element for email with id="email-input" and type="email" -->
+        <label for="email-input">Email:</label>
+        <input id="email-input" name="email" type="email" required="true">
 
     <!-- TODO: Add a label or paragraph for "Password" -->
     <!-- TODO: Add an input element for password with id="password-input" and type="password" -->
+        <label for="password-input">Password:</label>
+        <input id="password-input" name="password" type="password" required="true">
 
     <!-- TODO: Add a label or paragraph for "Repeat Password" -->
     <!-- TODO: Add an input element for repeat password with id="repeat-password-input" and type="password" -->
 
-    <!-- TODO: Add a register button with id="register-button" and text "Register" -->
+        <label for="repeat-password-input">Repeat Password:</label>
+        <input id="repeat-password-input" name="repeat-password" type="password" required="true">
 
+    <!-- TODO: Add a register button with id="register-button" and text "Register" -->
+        <button id="register-button" type="submit">Register</button>
+    </form>
+    <p id="error-message">Username or Email already exists</p>
     <script src="register-page.js"></script>
 </body>
 </html>

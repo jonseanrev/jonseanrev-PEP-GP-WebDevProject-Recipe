@@ -5,6 +5,7 @@ import java.util.Map;
 import com.revature.model.Chef;
 import com.revature.service.AuthenticationService;
 import com.revature.service.ChefService;
+
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -49,6 +50,7 @@ public class AuthenticationController {
      *            body
      */
     public void register(Context ctx) {
+        System.out.println("Register method called ----------------------------------------------");
         Chef newChef = ctx.bodyAsClass(Chef.class);
 
         if (chefService.searchChefs(newChef.getUsername()).stream()
