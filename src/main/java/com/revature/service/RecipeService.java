@@ -98,6 +98,7 @@ public class RecipeService {
      * @param id the unique identifier of the recipe to be deleted
      */
     public boolean deleteRecipe(int id) {
+        System.out.println("recipe service deleteRecipe() called");
         Recipe recipe = recipeDAO.getRecipeById(id);
         if (recipe != null) {
             recipeDAO.deleteRecipe(recipe);

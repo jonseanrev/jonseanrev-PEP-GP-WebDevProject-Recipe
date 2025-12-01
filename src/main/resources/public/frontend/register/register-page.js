@@ -102,7 +102,12 @@ async function processRegistration() {
     // await fetch(...)
     try {
         const response = await fetch(`${BASE_URL}/register`, requestOptions);
-        if(response.status == 409){
+        if(response.status == 201){
+            console.log("Registration Successful");
+            window.location.href = `../login/login-page.html`;
+            return
+        }
+        else if(response.status == 409){
             console.log("Conflict 409");
             alert("Alert that user/email already exists");
             errorMessage.textContent = "Alert that user/email already exists";

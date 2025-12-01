@@ -13,6 +13,9 @@
 #admin-link{
     visibility:hidden;
 }
+#logout-button{
+    visibility:hidden;
+}
 
  body, h1, h2, ul, li, p, input, textarea, a {
     margin: 2px;

@@ -17,10 +17,12 @@
 
     <!-- TODO: Add a hidden link with id="admin-link" to navigate to the ingredients page (admin only) -->
     <a id="admin-link" href='${BASE_URL}/ingredients'>Ingredients (Admin)</a>
-    <!-- TODO: Add a hidden Logout button with id="logout-button" -->
-    
-    <!-- TODO: Add an h1 heading for the Recipe Management section -->
 
+    <!-- TODO: Add a hidden Logout button with id="logout-button" -->
+    <button id="logout-button">Logout</button>
+    <button id="login-button">Login</button>
+    <!-- TODO: Add an h1 heading for the Recipe Management section -->
+    <h1>Recipe Management</h1>
 
     <!-- 🔍 Search a Recipe -->
     <!-- 
@@ -29,7 +31,9 @@
         - Add input with id="search-input"
         - Add button with id="search-button" and text "Search"
     -->
-
+    <h2>🔍 Search a Recipe</h2>
+    <input type="text" id="search-input" placeholder="1, 2, 3...">
+    <button id="search-button">Search</button>
 
     <!-- 📋 Recipe List -->
     <!-- 
@@ -37,7 +41,9 @@
         - Create a <ul> to hold all recipes
         - Give it id="recipe-list"
     -->
+    <ul id="recipe-list">
 
+    </ul>
 
     <!-- ➕ Add a Recipe -->
     <!-- 
@@ -47,7 +53,10 @@
         - Textarea for instructions (id="add-recipe-instructions-input")
         - Button to submit (id="add-recipe-submit-input") with text "Add Recipe"
     -->
-
+    <h2>➕ Add a Recipe</h2>
+    <input type="text" id="add-recipe-name-input" placeholder="Papa a la Huancaina">
+    <textarea id="add-recipe-instructions-input" placeholder="Instructions"></textarea>
+    <button id="add-recipe-submit-input">Add Recipe</button>
 
     <!-- ✏️ Update a Recipe -->
     <!-- 
@@ -57,7 +66,10 @@
         - Textarea for updated instructions (id="update-recipe-instructions-input")
         - Button (id="update-recipe-submit-input") with text "Update Recipe"
     -->
-
+    <h2>✏️ Update a Recipe</h2>
+    <input type="text" id="update-recipe-name-input" placeholder="Papa a la Huancaina">
+    <textarea id="update-recipe-instructions-input" placeholder="Updated Instructions"></textarea>
+    <button id="update-recipe-submit-input">Update Recipe</button>
 
     <!-- ❌ Delete a Recipe -->
     <!-- 
@@ -66,6 +78,9 @@
         - Input with id="delete-recipe-name-input"
         - Button with id="delete-recipe-submit-input" and text "Delete Recipe"
     -->
+    <h2>❌ Delete a Recipe</h2>
+    <input type="text" id="delete-recipe-name-input">
+    <button id="delete-recipe-submit-input">Delete Recipe</button>
 
     <script src="recipe-page.js"></script>
 </body>

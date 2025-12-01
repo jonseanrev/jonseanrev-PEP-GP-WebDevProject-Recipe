@@ -1,5 +1,9 @@
 package com.revature.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import com.revature.model.Chef;
 import com.revature.model.Recipe;
 import com.revature.service.AuthenticationService;
@@ -9,10 +13,6 @@ import com.revature.util.Page;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * The RecipeController class provides RESTful endpoints for managing recipes.
@@ -128,6 +128,7 @@ public class RecipeController {
      * Otherwise, responds with a 404 status and a result of "Recipe not found."
      */
     public Handler deleteRecipe = ctx -> {
+        System.out.println("deleteRecipe triggered in controller");
         try {
             // Parse the recipe ID from the path parameter
             int id = Integer.parseInt(ctx.pathParam("id"));
