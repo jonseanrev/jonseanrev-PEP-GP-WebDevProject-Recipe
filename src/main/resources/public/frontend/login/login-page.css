@@ -43,3 +43,7 @@ textarea, input {
 textarea {
     height: 50px;
 }
+
+#logout-button {
+    visibility:hidden;
+}

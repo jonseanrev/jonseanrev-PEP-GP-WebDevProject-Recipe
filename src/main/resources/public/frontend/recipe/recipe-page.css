@@ -10,6 +10,9 @@
  * - Define additional styles for error messages or validation feedback if required.
 
  */
+#admin-link{
+    visibility:hidden;
+}
 
  body, h1, h2, ul, li, p, input, textarea, a {
     margin: 2px;

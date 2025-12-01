@@ -3,8 +3,8 @@ package com.revature.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.revature.model.Chef;
 import com.revature.dao.ChefDAO;
+import com.revature.model.Chef;
 import com.revature.util.Page;
 import com.revature.util.PageOptions;
 
@@ -67,7 +67,9 @@ public class ChefService {
             return chefDAO.searchChefsByTerm(term);
         }
     }
-
+    public List<Chef> getChefs(){
+        return chefDAO.getAllChefs();
+    }
     /**
      * Deletes a Chef based on their unique identifier, if they exist.
      *

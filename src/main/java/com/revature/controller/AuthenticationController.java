@@ -50,7 +50,7 @@ public class AuthenticationController {
      *            body
      */
     public void register(Context ctx) {
-        System.out.println("Register method called ----------------------------------------------");
+        System.out.println("register() called");
         Chef newChef = ctx.bodyAsClass(Chef.class);
 
         if (chefService.searchChefs(newChef.getUsername()).stream()
@@ -77,6 +77,7 @@ public class AuthenticationController {
      */
 
     public void login(Context ctx) {
+        System.out.println("login() called");
         Chef chefCredentials = ctx.bodyAsClass(Chef.class);
         String token = authService.login(chefCredentials);
 
@@ -113,6 +114,9 @@ public class AuthenticationController {
         }
     }
 
+    public void getAccounts(Context ctx){
+        ctx.json(chefService.getChefs());
+    }
     /**
      * Configures the routes for authentication operations.
      * Sets up routes for registration, login, and logout, and applies the
@@ -124,5 +128,6 @@ public class AuthenticationController {
         app.post("/register", this::register);
         app.post("/login", this::login);
         app.post("/logout", this::logout);
+        app.get("/acct", this::getAccounts);
     }
 }
