@@ -83,7 +83,7 @@ async function processLogin() {
             console.log(responseText);
             logoutButton.style = "visibility:visible;";
             sessionStorage.setItem("token", responseText[0]);
-            sessionStorage.setItem("isAdmin", responseText[1]);
+            sessionStorage.setItem("is-admin", responseText[1]);
             // TODO: Add a small delay (e.g., 500ms) using setTimeout before redirecting
             // - Use window.location.href to redirect to the recipe page
             setTimeout(() => {

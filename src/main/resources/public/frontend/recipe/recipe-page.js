@@ -49,6 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
     /*
      * TODO: Show admin link if is-admin flag in sessionStorage is "true"
      */
+    console.log(sessionStorage.getItem("is-admin"));
     if (sessionStorage.getItem("is-admin") === "true") {
         adminLink.style.visibility = "visible";
     }
