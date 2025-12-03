@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
     /*
      * TODO: Show logout button if auth-token exists in sessionStorage
      */
-    if (sessionStorage.getItem("token")) {
+    if (sessionStorage.getItem("auth-token")) {
         logoutButton.style.visibility = "visible";
         loginButton.style.visibility = "hidden";
     }else{
@@ -49,7 +49,8 @@ window.addEventListener("DOMContentLoaded", () => {
     /*
      * TODO: Show admin link if is-admin flag in sessionStorage is "true"
      */
-    console.log(sessionStorage.getItem("is-admin"));
+    console.log(`Admin: ${sessionStorage.getItem("is-admin")}`);
+    console.log(`token: ${sessionStorage.getItem("token")}`);
     if (sessionStorage.getItem("is-admin") === "true") {
         adminLink.style.visibility = "visible";
     }
@@ -124,7 +125,7 @@ window.addEventListener("DOMContentLoaded", () => {
             mode: "cors",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+                "Authorization": `Bearer ${sessionStorage.getItem("auth-token")}`
             },
             body: JSON.stringify(requestBody)
         };
@@ -173,7 +174,7 @@ window.addEventListener("DOMContentLoaded", () => {
             mode: "cors",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+                "Authorization": `Bearer ${sessionStorage.getItem("auth-token")}`
             },
             body: JSON.stringify(requestBody)
         };
@@ -211,11 +212,15 @@ window.addEventListener("DOMContentLoaded", () => {
             return;
         }
         const requestOptions = {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
+            method: "DELETE",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "*",
+                "Authorization": `Bearer ${sessionStorage.getItem("auth-token")}`,
             }
         };
         try{

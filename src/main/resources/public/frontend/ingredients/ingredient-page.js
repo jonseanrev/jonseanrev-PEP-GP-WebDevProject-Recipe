@@ -35,6 +35,9 @@ let ingredients = [];
  * TODO: On page load, call getIngredients()
  */
 document.addEventListener('DOMContentLoaded', getIngredients);
+console.log(`Admin: ${sessionStorage.getItem("is-admin")}`);
+console.log(`token: ${sessionStorage.getItem("auth-token")}`);
+
 
 /**
  * TODO: Add Ingredient Function
@@ -67,7 +70,7 @@ async function addIngredient() {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "*",
-            "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+            "Authorization": `Bearer ${sessionStorage.getItem("auth-token")}`
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
@@ -149,14 +152,14 @@ async function deleteIngredient() {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "*",
-            "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+            "Authorization": `Bearer ${sessionStorage.getItem("auth-token")}`
         },
         redirect: "follow",
         referrerPolicy: "no-referrer"
     };
     try{
         let response = await fetch(target, requestOptions);
-        let status = await response.status;
+        let status = response.status;
         if(status === 204){
             getIngredients();
         }

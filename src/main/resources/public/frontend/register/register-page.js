@@ -8,13 +8,11 @@ const BASE_URL = "http://localhost:8081"; // backend URL
  * TODO: Get references to various DOM elements
  * - usernameInput, emailInput, passwordInput, repeatPasswordInput, registerButton
  */
-let registerForm = document.getElementById('register-form');
 let usernameInput = document.getElementById('username-input');
 let emailInput = document.getElementById('email-input');
 let passwordInput = document.getElementById('password-input');
 let repeatPasswordInput = document.getElementById('repeat-password-input');
 let registerButton = document.getElementById('register-button');
-let errorMessage = document.getElementById('error-message');
 
 
 let checkPass = () =>{
@@ -26,23 +24,17 @@ let formValid = () =>{
     if(!checkPass()){
         return false;
     }
-    if(!registerForm.checkValidity()){
+    if(!emailInput.value || !usernameInput.value || !passwordInput.value){
         return false;
     }
     return true;
 }
 
-//Prevent form from default submission and call processRegistration instead.
-registerForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    processRegistration();
-});
 
 /* 
  * TODO: Ensure the register button calls processRegistration when clicked
  */
-// This is redundant because the form event listener already handles it.
-// registerButton.addEventListener("click", processRegistration);
+registerButton.addEventListener("click", processRegistration);
 
 /**
  * TODO: Process Registration Function
@@ -73,11 +65,10 @@ async function processRegistration() {
     if(!formValid()){
         console.log("Form not valid");
         if(!checkPass()){
-            errorMessage.textContent = "Passwords Must Match!"
+            alert("Passwords must match!");
         }else{
-            errorMessage.textContent = "Form not Valid!";
+            alert("Form not valid!");
         }
-        errorMessage.style.visibility = 'visible';
         return
     }
     let username = usernameInput.value ;
@@ -92,8 +83,8 @@ async function processRegistration() {
         credentials: "same-origin",
         headers: {
             "Content-Type": "application/json",
-            //"Access-Control-Allow-Origin": "*",
-            //"Access-Control-Allow-Headers": "*"
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "*"
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
@@ -102,27 +93,23 @@ async function processRegistration() {
     // await fetch(...)
     try {
         const response = await fetch(`${BASE_URL}/register`, requestOptions);
-        if(response.status == 201){
+        let status = response.status;
+        if(status == 201){
             console.log("Registration Successful");
             window.location.href = `../login/login-page.html`;
             return
         }
-        else if(response.status == 409){
+        else if(status == 409){
             console.log("Conflict 409");
             alert("Alert that user/email already exists");
-            errorMessage.textContent = "Alert that user/email already exists";
-            errorMessage.style.visibility = 'visible';
             return
         }
-        else if(!response.ok){
+        else{
             alert("Alert something went wrong!");
-            errorMessage.textContent = "Alert something went wrong!";
-            errorMessage.style.visibility = 'visible';
             return
         }
-        let data = await response.json();
-        console.log(data)
-    } catch (error) {
+    } 
+    catch (error) {
         console.log("error occurred ")
         console.log(error);
         
