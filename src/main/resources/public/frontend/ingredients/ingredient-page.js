@@ -70,7 +70,7 @@ async function addIngredient() {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "*",
-            "Authorization": `Bearer ${sessionStorage.getItem("auth-token")}`
+            "Authorization": "Bearer" + sessionStorage.getItem("auth-token")
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
@@ -83,10 +83,10 @@ async function addIngredient() {
         if(status === 201){ 
             getIngredients();
         }else{
-            alert(`Something went wrong. code:${status}`);
+            //alert(`Something went wrong. code:${status}`);
         }
     }catch(error){
-        alert("Something went wrong!");
+        //alert("Something went wrong!");
         console.error(`Error adding ingredient: ${error}`);
     }
 
@@ -113,6 +113,7 @@ async function getIngredients() {
                     "Content-Type": "application/json",}
             });
             ingredients = await ingredientsResponse.json();
+            
             refreshIngredientList();
             return;
         }catch(error){
@@ -142,7 +143,7 @@ async function deleteIngredient() {
         alert("No such ingredient found!");
         return;
     }
-    let target = `${BASE_URL}/ingredients/${ingredientToDelete.id}`;
+    const target = `${BASE_URL}/ingredients/${ingredientToDelete.id}`;
     const requestOptions = {
         method: "DELETE",
         mode: "cors",
@@ -152,7 +153,7 @@ async function deleteIngredient() {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "*",
-            "Authorization": `Bearer ${sessionStorage.getItem("auth-token")}`
+            "Authorization": "Bearer " + sessionStorage.getItem('auth-token')
         },
         redirect: "follow",
         referrerPolicy: "no-referrer"
@@ -164,10 +165,10 @@ async function deleteIngredient() {
             getIngredients();
         }
         else{
-            alert(`Something unexpected happened. Code:${status}`);
+            //alert(`Something unexpected happened. Code:${status}`);
         }
     }catch(error){
-        alert("Something went wrong!");
+        //alert("Something went wrong!");
         console.log(`Error deleting ingredient: ${error}`);
     }
 }
