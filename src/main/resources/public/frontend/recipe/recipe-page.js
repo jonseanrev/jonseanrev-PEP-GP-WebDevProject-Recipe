@@ -50,7 +50,7 @@ window.addEventListener("DOMContentLoaded", () => {
      * TODO: Show admin link if is-admin flag in sessionStorage is "true"
      */
     console.log(`Admin: ${sessionStorage.getItem("is-admin")}`);
-    console.log(`token: ${sessionStorage.getItem("token")}`);
+    console.log(`auth-token: ${sessionStorage.getItem("auth-token")}`);
     if (sessionStorage.getItem("is-admin") === "true") {
         adminLink.style.visibility = "visible";
     }
@@ -286,9 +286,36 @@ window.addEventListener("DOMContentLoaded", () => {
      * - On failure: alert the user
      */
     async function processLogout() {
-        // Implement logout logic here
-        sessionStorage.clear();
-        window.location.href = `../login/login-page.html`;
+        console.log("processLogout() called");
+        let target = `${BASE_URL}/logout`;
+        const requestOptions = {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "*",
+                "Authorization": `Bearer ${sessionStorage.getItem("auth-token")}`
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer"
+        };
+        try{
+            let response = await fetch(target, requestOptions);
+            if(response.ok){
+                logoutButton.style = "visibility:hidden;";
+                sessionStorage.clear();
+                loginRedirect();
+            }
+            else{
+                alert(`Error: ${response.status}`);
+            }
+        }
+        catch(error){
+            console.error(`Error logging out:${error}`);
+        }
     }
 
     async function loginRedirect(){

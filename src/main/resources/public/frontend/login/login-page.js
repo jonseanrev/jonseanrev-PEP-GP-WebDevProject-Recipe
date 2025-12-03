@@ -23,6 +23,10 @@ let logoutButton = document.getElementById('logout-button');
 
 loginButton.addEventListener("click", processLogin);
 logoutButton.addEventListener("click", processLogout);
+if(sessionStorage.getItem('auth-token')){
+    logoutButton.style.visibility = 'visible';
+    loginButton.style.visibility = 'hidden';
+}
 /**
  * TODO: Process Login Function
  * 
@@ -45,10 +49,10 @@ logoutButton.addEventListener("click", processLogout);
  * - Use `window.location.href` for redirection
  */
 async function processLogin() {
+
     console.log("processLogin() called");
     // TODO: Retrieve username and password from input fields
     // - Trim input and validate that neither is empty
-    sessionStorage.clear();
     let username = usernameInput.value.trim();
     let password = passwordInput.value.trim();
     console.log(`user: ${username} , pass:${password}`);
@@ -83,9 +87,9 @@ async function processLogin() {
             const responseText = (await response.text()).split(' ');
             console.log(responseText);
             logoutButton.style = "visibility:visible;";
-            sessionStorage.setItem("token", responseText[0]);
+            //sessionStorage.setItem("token", responseText[0]);
             sessionStorage.setItem("auth-token", responseText[0]);
-            sessionStorage.setItem("isAdmin", responseText[1]);
+            //sessionStorage.setItem("isAdmin", responseText[1]);
             sessionStorage.setItem("is-admin", responseText[1]);
             // TODO: Add a small delay (e.g., 500ms) using setTimeout before redirecting
             // - Use window.location.href to redirect to the recipe page
@@ -117,9 +121,34 @@ async function processLogin() {
 
 async function processLogout() {
     console.log("processLogout() called");
-    // Clear session storage
-    sessionStorage.clear();
-    // Hide logout button
-    logoutButton.style = "visibility:hidden;";
-    alert("Logged out");
+    let target = `${BASE_URL}/logout`;
+    const requestOptions = {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Authorization": `Bearer ${sessionStorage.getItem("auth-token")}`
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer"
+    };
+    try{
+        let response = await fetch(target, requestOptions);
+        if(response.ok){
+            logoutButton.style.visibility = 'hidden';
+            loginButton.style.visibility = 'visible';
+            sessionStorage.clear();
+        }
+        else{
+            alert(`Error: ${response.status}`);
+        }
+    }
+    catch(error){
+        console.error(`Error logging out:${error}`);
+    }
+    
 }
